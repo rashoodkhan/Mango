@@ -1,0 +1,9 @@
+/*
+Featurs to be implemented in Future --
+*/
+
+1. store the user zoom level.
+2. store the user reader type.
+3. integrate multiple book formats.
+4. implement smart algorithm for frequently read bookmarked books (customizable bookmark list).
+5. categorise books.
