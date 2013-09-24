@@ -6,6 +6,8 @@ public class BookDetails {
 	
 	String title;
 	
+	String bookId;
+	
 	List<String> authors;
 	
 	String ISBN;
