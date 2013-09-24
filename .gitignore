@@ -14,5 +14,5 @@ dist
 /RUNNING_PID
 /.settings
 /.target
-conf/application.conf
-project/Build.scala
+/conf/application.conf
+/project/Build.scala
