@@ -28,12 +28,18 @@ public class User extends Model
 	BookList wishlist;
 
 	@Constraints.Required
+	@OneToOne
 	AccountDetails accDetails;
 
 	UserSettings userSett;
 
+	public User(String uId, String email, String password) 
+	{
+		this.userId = uId;
+		accDetails = new AccountDetails(uId,email,password);
+    }
 
-	// -- Queries
+	// -------- Queries
 	public static Model.Finder<String,User> find = new Model.Finder<String,User>(String.class, User.class);
 
 	/*
@@ -43,7 +49,7 @@ public class User extends Model
     {
     	String tempId = AccountDetails.findByEmail(email).userId;
 
-        return find.where().eq("userId", tempId).findUnique();
+        return find.ref(tempId);
     }
 
     /*
@@ -51,11 +57,20 @@ public class User extends Model
      */
     public static User authenticate(String email, String password) 
     {
-    	String tempId = AccountDetails.findByEmail(email).userId;
+    	String tempId = AccountDetails.authenticate(email, password).userId;
     	
-        return find.where()
-            .eq("email", email)
-            .eq("password", password)
-            .findUnique();
+        return find.ref(tempId);
     }
+
+//**------------ No user_id is being taken 
+    /*
+     * Create a new User
+     */
+    public static User create(String email, String password)
+    {
+    	User user = new User(email, email, password);
+    	user.save();
+    	return user;
+    }
+    
 }
